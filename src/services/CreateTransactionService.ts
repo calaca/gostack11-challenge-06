@@ -1,4 +1,4 @@
-import { getCustomRepository, getRepository, Like } from 'typeorm';
+import { getCustomRepository, getRepository } from 'typeorm';
 
 // import AppError from '../errors/AppError';
 
