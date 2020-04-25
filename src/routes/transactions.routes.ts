@@ -13,11 +13,10 @@ transactionsRouter.get('/', async (request, response) => {
   try {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
 
-    /**
-     * TODO:
-     * 1. Show category object instead of category_id
-     */
-    const transactions = await transactionsRepository.find();
+    const transactions = await transactionsRepository.find({
+      select: ['id', 'title', 'value', 'type', 'created_at', 'updated_at'],
+      relations: ['category'],
+    });
 
     const balance = await transactionsRepository.getBalance();
 
