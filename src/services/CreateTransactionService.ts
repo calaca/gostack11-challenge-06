@@ -1,4 +1,4 @@
-import { getCustomRepository, getRepository } from 'typeorm';
+import { getCustomRepository, getRepository, Like } from 'typeorm';
 
 // import AppError from '../errors/AppError';
 
@@ -34,12 +34,12 @@ class CreateTransactionService {
     }
 
     // check if category exists
-    const categoryExists = await categoriesRepository.findOne({
-      where: `"title" ILIKE '${title}%'`,
+    const categoryExists = await categoriesRepository.find({
+      where: { title: category },
     });
 
-    if (categoryExists) {
-      category_id = categoryExists.id;
+    if (categoryExists.length !== 0) {
+      category_id = categoryExists[0].id;
     } else {
       const newCategory = categoriesRepository.create({
         title: category,
