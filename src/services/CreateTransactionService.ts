@@ -34,12 +34,12 @@ class CreateTransactionService {
     }
 
     // check if category exists
-    const categoryExists = await categoriesRepository.find({
+    const categoryExists = await categoriesRepository.findOne({
       where: { title: category },
     });
 
-    if (categoryExists.length !== 0) {
-      category_id = categoryExists[0].id;
+    if (categoryExists) {
+      category_id = categoryExists.id;
     } else {
       const newCategory = categoriesRepository.create({
         title: category,
