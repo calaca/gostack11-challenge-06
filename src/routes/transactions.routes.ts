@@ -22,7 +22,9 @@ transactionsRouter.get('/', async (request, response) => {
 
     return response.status(200).json({ transactions, balance });
   } catch (err) {
-    return response.status(400).json({ error: err.message });
+    return response
+      .status(err.statusCode)
+      .json({ message: err.message, status: 'error' });
   }
 });
 
@@ -41,7 +43,9 @@ transactionsRouter.post('/', async (request, response) => {
 
     return response.status(200).json(transaction);
   } catch (err) {
-    return response.status(400).json({ error: err.message });
+    return response
+      .status(err.statusCode)
+      .json({ message: err.message, status: 'error' });
   }
 });
 
@@ -55,7 +59,9 @@ transactionsRouter.delete('/:id', async (request, response) => {
 
     return response.sendStatus(200);
   } catch (err) {
-    return response.status(400).json({ error: err.message });
+    return response
+      .status(err.statusCode)
+      .json({ message: err.message, status: 'error' });
   }
 });
 
@@ -63,7 +69,9 @@ transactionsRouter.post('/import', async (request, response) => {
   try {
     return response.send();
   } catch (err) {
-    return response.status(400).json({ error: err.message });
+    return response
+      .status(err.statusCode)
+      .json({ message: err.message, status: 'error' });
   }
 });
 

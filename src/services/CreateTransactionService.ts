@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from 'typeorm';
 
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 import Transaction from '../models/Transaction';
 import Category from '../models/Category';
@@ -29,7 +29,7 @@ class CreateTransactionService {
       const balance = await transactionsRepository.getBalance();
 
       if (value > balance.total) {
-        throw Error('Cannot make outcomes greater than your balance');
+        throw new AppError('Cannot make outcomes greater than your balance');
       }
     }
 
